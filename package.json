@@ -14,9 +14,10 @@
     "@types/bcryptjs": "^2.4.6",
     "@vercel/postgres": "^0.7.2",
     "bcryptjs": "^2.4.3",
-    "next": "14.1.0",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "latest",
+    "next-routes": "^1.4.2",
+    "react": "latest",
+    "react-dom": "latest",
     "react-router-dom": "^6",
     "resend": "^3.2.0"
   },

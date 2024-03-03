@@ -1,4 +1,6 @@
 "use client";
+import { redirect } from "next/navigation";
+import { useLayoutEffect } from "react";
 import { useEffect, useState } from "react";
 interface PlayerProps {
   params: {
@@ -41,12 +43,11 @@ const PlayersList = ({ params }: PlayerProps) => {
   };
 
   const handleAddPlayer = async (event: React.FormEvent) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    if (!newPlayerName.trim()) return; // Basic validation
+    event.preventDefault();
+    if (!newPlayerName.trim()) return;
 
     try {
       const response = await fetch(`/api/${params.team}/addplayer`, {
-        // Ensure this endpoint matches your server setup
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,12 +58,11 @@ const PlayersList = ({ params }: PlayerProps) => {
       });
 
       if (!response.ok) {
-        // Handle error response
         throw new Error(`Failed to add player: ${response.statusText}`);
       }
 
-      setNewPlayerName(""); // Reset input field
-      fetchPlayers(); // Refresh the players list
+      setNewPlayerName("");
+      fetchPlayers();
     } catch (error) {
       console.error("Error adding player:", error);
     }
@@ -83,11 +83,10 @@ const PlayersList = ({ params }: PlayerProps) => {
 
       if (response.ok) {
         if (response.status !== 204) {
-          // Check if the response is not No Content
           const data = await response.json();
-          console.log(data); // Handle JSON data here
+          console.log(data);
         }
-        fetchPlayers(); // Refresh the players list after successful deletion
+        fetchPlayers();
       } else {
         throw new Error(`Failed to delete player: ${response.statusText}`);
       }

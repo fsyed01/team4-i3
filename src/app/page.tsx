@@ -19,10 +19,11 @@ export default async function Page() {
             padding: "10px",
             borderRadius: "5px",
             fontWeight: "bold",
+            marginRight: "10px",
           }}
         >
           Go to Dashboard
-        </Link>{" "}
+        </Link>
         <Link
           href="/learnmore"
           style={{
@@ -32,9 +33,23 @@ export default async function Page() {
             padding: "10px",
             borderRadius: "5px",
             fontWeight: "bold",
+            marginRight: "10px",
           }}
         >
           Learn More
+        </Link>
+        <Link
+          href="/login"
+          style={{
+            textDecoration: "none",
+            color: "white",
+            backgroundColor: "#009879",
+            padding: "10px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+          }}
+        >
+          Manager
         </Link>
         <h2>2023 Final Standings</h2>
         <table>

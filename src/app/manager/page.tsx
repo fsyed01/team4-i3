@@ -1,68 +1,50 @@
-"use client";
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-// Import useNavigate hook from react-router-dom
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./styles.module.css";
 
 export default function Manager() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter(); // Initialize useNavigate hook
-
-  // Function to handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
-    // Placeholder for actual authentication logic
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        // If authentication is successful, redirect to the desired page
-        router.push("/dashboard"); // Use navigate instead of history.push
-      } else {
-        // Handle errors or unsuccessful login attempts here
-        alert("Login failed. Please check your username and password.");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("An error occurred. Please try again later.");
-    }
-  };
+  const teams = [
+    {
+      name: "Mosquitoes",
+      href: "/mosquitoes/",
+      logo: "/logos/Mosquitoes.jpeg",
+    },
+    { name: "Hyenas", href: "/hyenas", logo: "/logos/hyenas.jpeg" },
+    { name: "Pacey Chickens", href: "/chickens", logo: "/logos/PCFC.jpeg" },
+    {
+      name: "Grass Kickers",
+      href: "/grasskickers",
+      logo: "/logos/grasskickers.jpeg",
+    },
+    { name: "Emus", href: "/emus", logo: "/logos/emus.jpeg" },
+    {
+      name: "Mocking Birds",
+      href: "/mockingbirds",
+      logo: "/logos/mockingbirds.jpeg",
+    },
+  ];
 
   return (
     <div>
-      <h1>Welcome to Admin Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <b>Username</b>
-        </label>
-        <input
-          type="text"
-          placeholder="username"
-          name="uname"
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>
-        <br />
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="password"
-          name="pwd"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <br />
-        <button type="submit">Login</button>
-      </form>
+      <h1>Managers</h1>
+      <div className={styles.cardContainer}>
+        {teams.map((team) => (
+          <Link key={team.name} href={team.href} passHref>
+            <div className={styles.card}>
+              <div className={styles.logoWrapper}>
+                <Image
+                  src={team.logo}
+                  alt={`${team.name} logo`}
+                  width={100}
+                  height={100}
+                  layout="responsive"
+                />
+              </div>
+              <div className={styles.teamName}>{team.name}</div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
